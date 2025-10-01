@@ -1,101 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Engineering Final Exam</title>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            max-width: 800px; 
-            margin: 0 auto; 
-            padding: 20px; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-        }
-        .container { 
-            background: rgba(255,255,255,0.1); 
-            padding: 30px; 
-            border-radius: 10px; 
-            backdrop-filter: blur(10px);
-            margin: 20px 0;
-        }
-        .info-box { 
-            background: rgba(255,255,255,0.2); 
-            padding: 20px; 
-            margin: 15px 0; 
-            border-radius: 8px; 
-            text-align: left;
-        }
-        .instance-ip {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #ffeb3b;
-        }
-    </style>
-</head>
+<html>
+<head><title>My EC2 Site</title></head>
 <body>
-    <div class="container">
-        <h1>🚀 Cloud Engineering Final Exam</h1>
-        <h2>Successfully Deployed Website on EC2</h2>
-        <p>This demonstrates automated deployment using Ansible</p>
-    </div>
-
-    <div class="info-box">
-        <h3>📊 Instance Information</h3>
-        <p><strong>Instance IP Address:</strong> <span class="instance-ip" id="ip-address">Loading...</span></p>
-        <p><strong>Hostname:</strong> <span id="hostname">Loading...</span></p>
-        <p><strong>Availability Zone:</strong> <span id="az">Loading...</span></p>
-        <p><strong>Instance Type:</strong> <span id="instance-type">Loading...</span></p>
-    </div>
-
-    <div class="info-box">
-        <h3>🛠️ Technical Stack</h3>
-        <ul>
-            <li>Amazon EC2 Instance (t2.micro)</li>
-            <li>NGINX Web Server</li>
-            <li>Ansible Automation</li>
-            <li>Application Load Balancer</li>
-            <li>AWS S3 Static Hosting</li>
-            <li>Custom VPC Network</li>
-        </ul>
-    </div>
-
-    <script>
-        // Simple script to fetch instance metadata
-        async function getInstanceMetadata() {
-            try {
-                // Fetch private IP
-                const ipResponse = await fetch('http://169.254.169.254/latest/meta-data/local-ipv4');
-                const privateIp = await ipResponse.text();
-                document.getElementById('ip-address').textContent = privateIp;
-                
-                // Fetch hostname
-                const hostnameResponse = await fetch('http://169.254.169.254/latest/meta-data/hostname');
-                const hostname = await hostnameResponse.text();
-                document.getElementById('hostname').textContent = hostname.split('.')[0];
-                
-                // Fetch availability zone
-                const azResponse = await fetch('http://169.254.169.254/latest/meta-data/placement/availability-zone');
-                const az = await azResponse.text();
-                document.getElementById('az').textContent = az;
-                
-                // Fetch instance type
-                const typeResponse = await fetch('http://169.254.169.254/latest/meta-data/instance-type');
-                const instanceType = await typeResponse.text();
-                document.getElementById('instance-type').textContent = instanceType;
-                
-            } catch (error) {
-                document.getElementById('ip-address').textContent = 'Not running on EC2';
-                document.getElementById('hostname').textContent = 'Static Website';
-                document.getElementById('az').textContent = 'us-east-1';
-                document.getElementById('instance-type').textContent = 'S3';
-            }
-        }
-        
-        // Call the function when page loads
-        window.onload = getInstanceMetadata;
-    </script>
+<h1>Welcome to My EC2 Website!</h1>
+<p>Server IP: <span id="ip">Loading...</span></p>
+<script>
+// Fallback JS for client IP (but we'll override with server IP via script)
+fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => document.getElementById('ip').innerText = d.ip);
+</script>
 </body>
 </html>
