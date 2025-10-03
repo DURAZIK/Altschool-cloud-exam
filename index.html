@@ -1,6 +1,25 @@
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hello from EC2</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+           display:flex; align-items:center; justify-content:center; height:100vh; margin:0;
+           background: linear-gradient(180deg,#f7fafc,#edf2f7); color:#111827; }
+    .card { background:white; padding:28px; border-radius:12px; box-shadow:0 8px 24px rgba(2,6,23,0.08); max-width:640px; text-align:center; }
+    h1 { margin:0 0 10px; font-size:28px; }
+    p { margin:0; font-size:16px; color:#374151; }
+    .ip { margin-top:12px; font-weight:600; color:#0f172a; }
+  </style>
+</head>
 <body>
+  <div class="card">
     <h1>Hello from EC2 Instance</h1>
-    <p>This server’s IP is: <?php echo $_SERVER['SERVER_ADDR']; ?></p>
+    <p>This server’s IP is:</p>
+    <div class="ip">INSTANCE_IP_PLACEHOLDER</div>
+  </div>
 </body>
 </html>
+
