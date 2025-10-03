@@ -1,0 +1,28 @@
+---
+- name: Deploy NGINX and HTML page on Ubuntu EC2
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Update packages
+      apt:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Install NGINX
+      apt:
+        name: nginx
+        state: present
+
+    - name: Ensure NGINX is started and enabled
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy HTML page
+      template:
+        src: templates/index.html
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
